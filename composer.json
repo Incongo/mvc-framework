@@ -1,15 +1,16 @@
 {
-    "name": "formacom/mvc",
+    "name": "incongo/mvc",
     "description": "Framework mvc",
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Formacom\\Mvc\\": "src/"
+            "App\\": "src/",
+            "Core\\": "core/"
         }
     },
     "authors": [
         {
-            "name": "Formacom"
+            "name": "Incongo"
         }
     ],
     "require": {
