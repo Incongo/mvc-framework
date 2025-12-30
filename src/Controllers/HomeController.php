@@ -6,14 +6,15 @@ namespace App\Controllers;
 
 use Core\Controller;
 
+
 class HomeController extends Controller
 {
     public function index(): void
     {
 
         $this->view('home/index', [
-            'titulo' => 'Gestión de Usuarios',
-            'mensaje' => 'Bienvenido a la Home 🚀'
+            'titulo' => 'Home',
+            'mensaje' => 'Bienvenido a Home 🚀',
         ]);
     }
 }
