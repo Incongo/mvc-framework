@@ -14,7 +14,7 @@ class HomeController extends Controller
 
         $this->view('home/index', [
             'titulo' => 'Home',
-            'mensaje' => 'Bienvenido a Home 🚀',
+            'mensaje' => 'Bienvenido a Home 🏠',
         ]);
     }
 }

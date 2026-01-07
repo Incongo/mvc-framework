@@ -12,11 +12,37 @@ class AuthController extends Controller
 {
     public function login(): void
     {
+
+        if (isset($_POST["email"]) && isset($_POST["password"])) {
+            $this->procesar();
+            return;
+        }
         $this->view('auth/login', []);
     }
 
-    public function register(): void {}
-    public function procesar(): void
+    public function register(): void
+    {
+        if (isset($_POST["nombre"]) && isset($_POST["email"]) && isset($_POST["password"])) {
+            // Procesar registro
+            try {
+                $usuario = new Usuario();
+                $usuario->nombre = $_POST["nombre"];
+                $usuario->email = $_POST["email"];
+                $usuario->password = password_hash($_POST["password"], PASSWORD_BCRYPT);
+                $usuario->save();
+                header('Location: ' . BASE_URL . 'auth/login');
+                exit;
+            } catch (\Exception $e) {
+                $this->view('auth/register', [
+                    'error' => 'Error al registrar el usuario: El email ya existe.'
+                ]);
+                return;
+            }
+        }
+        $this->view('auth/register', []);
+    }
+
+    private function procesar(): void
     {
         //usar el modelo User para validar el login
         //buscar usuario por email
@@ -32,5 +58,12 @@ class AuthController extends Controller
                 'error' => 'Email o contraseña incorrectos.'
             ]);
         }
+    }
+    public final function logout(): void
+    {
+        // Destruir sesión y redirigir al login
+        session_destroy();
+        header('Location: ' . BASE_URL);
+        exit;
     }
 }
